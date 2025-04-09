@@ -4,18 +4,30 @@ def main(page: ft.Page):
     page.title = "App de boas vindas!"
     page.theme_mode = "Dark"
     
-    inputNome = ft.TextField(hint_text="Coloque seu primeiro nome: ", width="350")
-    inputSobrenome = ft.TextField(hint_text="Coloque seu sobrenome: ", width="350")
+    # Input do nome do usuario
+    inputNome = ft.TextField(label="Coloque seu primeiro nome", autofocus=True)
+    # Input do sobrenome do usuario
+    inputSobrenome = ft.TextField(label="Coloque seu sobrenome")
 
-    def BotaoOla(e):
+    controleDeColuna = ft.Column()
+    # Função de quando o botão é clicado
+    def BoasVindas(e):
         page.add(ft.Text(f"Bem vindo(a) {inputNome.value} {inputSobrenome.value}"))
+        inputNome.value = ""
+        inputSobrenome.value = ""
+        inputNome.focus()
+        inputSobrenome.focus()
+        
+
+    # Botão clicavel
+    botao = ft.ElevatedButton(text="Botão de boas vindas!", on_click=BoasVindas)
 
     page.add(
         ft.Column(
             [
             inputNome,
             inputSobrenome,
-            ft.ElevatedButton(text="Botâo de boas vindas!", on_click=BotaoOla)
+            botao
             ]
     )
 )
